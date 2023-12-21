@@ -19,13 +19,13 @@ jobs:
       uses: Azure/acr-build@v1
       with:
         # Service Principal with Contributor role on the ACR
-        service_principal: $az_service_principal 
+        service_principal: ${{ vars. az_service_principal }} 
         # Service Principal password
         service_principal_password: ${{ secrets.az_service_principal_password }}
         # Azure Container Registry tenant
-        tenant: $az_tenant_id
+        tenant: ${{ vars.az_tenant_id }}
         # The name of the ACR, minus the .azurecr.io
-        registry: az_container_registry
+        registry: ${{ vars.az_container_registry }}
         # Repository to use
         repository: docker-aks-dns-operator
         # Github access token for private repositories
