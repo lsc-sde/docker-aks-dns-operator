@@ -35,6 +35,5 @@ jobs:
         # Docker image tag, default to the commit SHA
         branch: main # optional
         # The folder in the Github repo that holds the source
-        folder: /
-        # The location of the Dockerfile; defaults to ./Dockerfile
+        folder: ./
               
