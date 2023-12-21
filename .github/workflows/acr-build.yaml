@@ -27,11 +27,11 @@ jobs:
         # The name of the ACR, minus the .azurecr.io
         registry: ${{ vars.az_container_registry }}
         # Repository to use
-        repository: "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"
+        repository: operators
         # Github access token for private repositories
         git_access_token: ${{ secrets.pat_token }}
         # Docker image name
-        image: operators/aks-dns-operator # optional
+        image: aks-dns-operator # optional
         # Docker image tag, default to the commit SHA
         branch: main # optional
         # The folder in the Github repo that holds the source
