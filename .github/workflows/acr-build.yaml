@@ -1,0 +1,40 @@
+name: ACR Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Azure Container Registry Build
+      uses: Azure/acr-build@v1
+      with:
+        # Service Principal with Contributor role on the ACR
+        service_principal: ${{ variables.az_service_principal }} 
+        # Service Principal password
+        service_principal_password: ${{ secrets.az_service_principal_password }}
+        # Azure Container Registry tenant
+        tenant: ${{ variables.az_tenant_id }}
+        # The name of the ACR, minus the .azurecr.io
+        registry: ${{ variables.az_container_registry }}
+        # Repository to use
+        repository: docker-aks-dns-operator
+        # Github access token for private repositories
+        git_access_token: ${{ secrets.pat_token }}
+        # Docker image name
+        image: operators/aks-dns-operator # optional
+        # Docker image tag, default to the commit SHA
+        branch: main # optional
+        # The folder in the Github repo that holds the source
+        folder: /
+        # The location of the Dockerfile; defaults to ./Dockerfile
+              
