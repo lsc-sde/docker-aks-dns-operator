@@ -46,5 +46,6 @@ jobs:
         password: ${{ secrets.az_service_principal_password }}
     - name: 'Tag and push'
       run: |
+        docker image pull "${{ vars.az_container_registry }}.azurecr.io/operators/aks-dns-operator:${{ github.sha }}" "${{ vars.az_container_registry }}.azurecr.io/operators/aks-dns-operator:${{ vars.environment_tag }}"
         docker image tag "${{ vars.az_container_registry }}.azurecr.io/operators/aks-dns-operator:${{ github.sha }}" "${{ vars.az_container_registry }}.azurecr.io/operators/aks-dns-operator:${{ vars.environment_tag }}"
         docker image push "${{ vars.az_container_registry }}.azurecr.io/operators/aks-dns-operator:${{ vars.environment_tag }}"
