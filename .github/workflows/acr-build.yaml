@@ -10,8 +10,8 @@ jobs:
   build:
     uses: lsc-sde/lsc-sde/.github/workflows/acr-build.yaml@main
     with:
+      azureKeyvault: ${{ vars.sandbox_az_keyvault }}
       repository: controllers
       imageName: aks-dns-controller
-      azureKeyvault: ${{ vars.sandbox_az_keyvault }}
     secrets:
       azureCredentials: ${{ secrets.sandbox_az_credentials }}
