@@ -11,5 +11,5 @@ jobs:
     uses: lsc-sde/lsc-sde/.github/workflows/acr-build.yaml@main
     with:
       repository: controllers
-      imageName: aks-dns-operator
+      imageName: aks-dns-controller
       environment: Sandbox
