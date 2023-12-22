@@ -12,7 +12,6 @@ jobs:
     with:
       repository: controllers
       imageName: aks-dns-controller
-      environment: Sandbox
       azureKeyvault: ${{ vars.sandbox_az_keyvault }}
     secrets:
       azureCredentials: ${{ secrets.sandbox_az_credentials }}
