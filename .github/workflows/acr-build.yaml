@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    uses: lsc-sde/lsc-sde/.github/workflows/acr-build.yml@main
+    uses: lsc-sde/lsc-sde/.github/workflows/acr-build.yaml@main
     with:
       repository: controllers
       imageName: aks-dns-operator
