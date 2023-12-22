@@ -15,4 +15,4 @@ jobs:
       environment: Sandbox
       azureKeyvault: ${{ vars.sandbox_az_keyvault }}
     secrets:
-      azureCredentials: ${{ secret.sandbox_az_credentials }}
+      azureCredentials: ${{ secrets.sandbox_az_credentials }}
