@@ -12,3 +12,4 @@ jobs:
     with:
       repository: controllers
       imageName: aks-dns-operator
+      environment: Sandbox
