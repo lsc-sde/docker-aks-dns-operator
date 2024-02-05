@@ -27,32 +27,39 @@ def set_a_record(name: str, ip_addresses : [], managed_by : str):
     perform_update : bool = True
     if len(filtered_records) > 0:
         record = filtered_records[0]
-        currently_managed_by = record.metadata.get("managedBy")
+        metadata = record.metadata
         
-        if not currently_managed_by:
+        if not metadata:
             perform_update = False
-            logging.error(f"The current record has no managedBy flag")
-
-        elif currently_managed_by != managed_by:
-            perform_update = False
-            logging.error(f"{name} is currently managed by '{currently_managed_by}' not '{managed_by}'")
+            logging.error(f"Cannot read metadata on existing record")
 
         else:
-            found_differences : bool = False
-            for ip in record.a_records: 
-                if ip.ipv4_address not in ip_addresses:
-                    logging.info(f"{ip.ipv4_address} has been removed")
-                    found_differences = True
-
-            for ip in ip_addresses:
-                if ip not in [e.ipv4_address for e in record.a_records]:
-                    logging.info(f"{ip} has been added")
-                    found_differences = True
-
-            if not found_differences:
-                logging.info(f"No differences on {name} to target {ip_addresses}, no update required")
-                perform_update = True
+            currently_managed_by = metadata.get("managedBy")
             
+            if not currently_managed_by:
+                perform_update = False
+                logging.error(f"The current record has no managedBy flag")
+
+            elif currently_managed_by != managed_by:
+                perform_update = False
+                logging.error(f"{name} is currently managed by '{currently_managed_by}' not '{managed_by}'")
+
+            else:
+                found_differences : bool = False
+                for ip in record.a_records: 
+                    if ip.ipv4_address not in ip_addresses:
+                        logging.info(f"{ip.ipv4_address} has been removed")
+                        found_differences = True
+
+                for ip in ip_addresses:
+                    if ip not in [e.ipv4_address for e in record.a_records]:
+                        logging.info(f"{ip} has been added")
+                        found_differences = True
+
+                if not found_differences:
+                    logging.info(f"No differences on {name} to target {ip_addresses}, no update required")
+                    perform_update = True
+                
     if perform_update:
         logging.info(f"Updating A {name} to target {ip_addresses}")
         targets = [{ "ipv4Address" : ip } for ip in ip_addresses]
@@ -85,19 +92,25 @@ def set_c_record(name: str, target: str, managed_by : str):
     perform_update : bool = True
     if len(filtered_records) > 0:
         record = filtered_records[0]
-        currently_managed_by = record.metadata.get("managedBy")
+        metadata = record.metadata
         
-        if not currently_managed_by:
+        if not metadata:
             perform_update = False
-            logging.error(f"The current record has no managedBy flag")
+            logging.error(f"Cannot read metadata on existing record")
+        else:
+            currently_managed_by = metadata.get("managedBy")
+            
+            if not currently_managed_by:
+                perform_update = False
+                logging.error(f"The current record has no managedBy flag")
 
-        elif currently_managed_by != managed_by:
-            perform_update = False
-            logging.error(f"{name} is currently managed by '{currently_managed_by}' not '{managed_by}'")
+            elif currently_managed_by != managed_by:
+                perform_update = False
+                logging.error(f"{name} is currently managed by '{currently_managed_by}' not '{managed_by}'")
 
-        elif record.cname_record.cname == target:
-            logging.info(f"{name} is already set to '{record.cname_record.cname}', no update needed")
-            perform_update = False
+            elif record.cname_record.cname == target:
+                logging.info(f"{name} is already set to '{record.cname_record.cname}', no update needed")
+                perform_update = False
 
     if perform_update:
         logging.info(f"Updating CNAME {name} to target {target}")

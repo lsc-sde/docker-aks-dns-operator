@@ -1,5 +1,5 @@
 replicas: 1
-image: nhssjt/aks-dns-operator:0.1.0
+image: nhssjt/aks-dns-operator:0.1.7
 nodeSelector: {}
 tolerations: []
 volumes: []
