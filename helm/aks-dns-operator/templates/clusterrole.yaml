@@ -29,6 +29,6 @@ rules:
   verbs: ["list", "watch", "patch", "get"]
 
 # Ingress
-- apiGroups: ["networking.k8s.io/v1"]
+- apiGroups: ["networking.k8s.io"]
   resources: ["ingresses"]
   verbs: ["get", "watch", "list"]
