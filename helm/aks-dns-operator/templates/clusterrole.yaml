@@ -5,8 +5,13 @@ metadata:
 rules:
 # Core Read
 - apiGroups: [""]
-  resources: ["service","namespaces"]
+  resources: ["services","namespaces"]
   verbs: ["get","watch","list"]
+
+# Patch for Services
+- apiGroups: [""]
+  resources: ["services"]
+  verbs: ["patch"]
 
 # CRD Read
 - apiGroups: ["apiextensions.k8s.io"]
@@ -31,4 +36,4 @@ rules:
 # Ingress
 - apiGroups: ["networking.k8s.io"]
   resources: ["ingresses"]
-  verbs: ["get", "watch", "list"]
+  verbs: ["get", "watch", "list", "patch"]
