@@ -10,7 +10,7 @@ rules:
 
 # Patch for Services
 - apiGroups: [""]
-  resources: ["services/status"]
+  resources: ["services", "services/status"]
   verbs: ["patch"]
 
 # CRD Read
@@ -39,5 +39,5 @@ rules:
   verbs: ["get", "watch", "list"]
 
 - apiGroups: ["networking.k8s.io"]
-  resources: ["ingresses/status"]
+  resources: ["ingresses", "ingresses/status"]
   verbs: ["patch"]
