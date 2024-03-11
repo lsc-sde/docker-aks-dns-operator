@@ -12,10 +12,21 @@ jobs:
     with:
       useConfigFile: true
 
+
   buildandpush:
     uses: lsc-sde/lsc-sde/.github/workflows/docker-build.yaml@main
     needs: semver
     with:
       imageName: aks-dns-operator
       tag: ${{ needs.semver.outputs.GitVersion_SemVer }}
+    secrets: inherit
+
+  submodule:
+    uses: lsc-sde/lsc-sde/.github/workflows/update-submodules.yaml@main
+    needs: 
+    - semver
+    - buildandpush
+    with:
+      symver: ${{ needs.semver.outputs.GitVersion_SemVer }}
+      directory: docker/aks-dns-operator
     secrets: inherit
