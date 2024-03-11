@@ -1,8 +1,0 @@
-replicas: 1
-image: lscsde/aks-dns-operator:0.1.8
-nodeSelector: {}
-tolerations: []
-volumes: []
-volumeMounts: []
-env: []
-resources: {}
