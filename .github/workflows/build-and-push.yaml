@@ -12,4 +12,5 @@ jobs:
     with:
       imageName: aks-dns-operator
       directory: docker/aks-dns-operator
+      platforms: '["amd64"]'
     secrets: inherit
