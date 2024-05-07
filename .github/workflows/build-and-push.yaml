@@ -11,6 +11,6 @@ jobs:
     uses: lsc-sde/lsc-sde/.github/workflows/docker-release.yaml@main
     with:
       imageName: aks-dns-operator
-      directory: docker/aks-dns-operator
+      directory: products/sde/aks-dns-operator/docker-aks-dns-operator
       platforms: '["amd64"]'
     secrets: inherit
