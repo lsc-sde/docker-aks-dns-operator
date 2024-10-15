@@ -171,6 +171,11 @@ def process_record(type, annotations, name, namespace, status):
 
 
 
+@kopf.on.startup()
+def configure(settings: kopf.OperatorSettings, **_):
+    settings.watching.connect_timeout = 60
+    settings.watching.server_timeout = 60
+
 @kopf.on.create("Ingress")
 @kopf.on.update("Ingress")
 @kopf.on.resume("Ingress")
